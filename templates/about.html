@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+<br>
+
+
+<table border="2px" width="500px">
+    <tr>
+        <th>
+            Application no
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Section
+        </th>
+    </tr>
+
+    {% for qs in queryset %}
+    <tr>
+        <td>
+            {{qs.application_no}}
+        </td>
+        <td>
+            {{qs.name}}
+        </td>
+        <td>
+            {{qs.section}}
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+
+{% endblock %}
+

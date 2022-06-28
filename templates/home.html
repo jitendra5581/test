@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+
+<h1>
+    Welcome on my home page 
+</h1>
+
+<table width='500px' class="table-striped"> 
+<tr>
+    <th>
+        Sr
+    </th>
+    <th>
+        Name
+    </th>
+    <th>
+        Address
+    </th>
+</tr>
+{% for n, a in info %}
+<tr>
+    <td>
+        1
+    </td>
+    <td>
+        {{n}}
+    </td>
+   <td>{{a}}</td> 
+</tr>
+
+{%endfor%}
+
+</table>
+
+
+
+
+{% endblock %}
+
