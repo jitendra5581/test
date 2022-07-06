@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+
+<h1>
+   Student details are bellow
+</h1>
+
+<div>
+    Application No : {{ queryset.application_no }}
+</div>
+
+<div>
+    Name : {{ queryset.name }}
+</div>
+
+<div>
+    Section : {{ queryset.section }}
+</div>
+
+{% endblock %}
+

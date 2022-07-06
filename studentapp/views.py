@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 
 
@@ -16,14 +16,14 @@ def home_view(request):
 
 
 def about_view(request):
-    qs = AdmissionDetails.objects.all()
-    data = {'queryset': qs}
     
-    return render(request, 'about.html', context=data)
+    return render(request, 'about.html')
 
 
 def login_view(request):
-    data = {}
+    qs = AdmissionDetails.objects.all()
+    data = {'queryset': qs}
+        
     if (request.method=='POST'):
         
         ad_no = request.POST.get('adno_text')
@@ -56,6 +56,40 @@ def login_view(request):
             )
         
         #********************
-        data['result'] = "your record has been saved"
         
+                
     return render(request, 'login.html', context=data)
+
+
+def delete_view(request):
+    id = request.GET.get("id")    
+    AdmissionDetails.objects.filter(application_no=id).delete()
+    qs = AdmissionDetails.objects.all()
+    data = {'queryset': qs}
+                
+    return render(request, 'login.html', context=data)
+
+
+def details_view(request):
+    id = request.GET.get("id")    
+    qs = AdmissionDetails.objects.filter(application_no=id).first()
+    data = {'queryset': qs}
+                
+    return render(request, 'details.html', context=data)
+
+
+def edit_view(request):
+    id = request.GET.get("id")    
+    obj = AdmissionDetails.objects.filter(application_no=id).first()
+    data = {'queryset': obj}
+    
+    if (request.method=='POST'):
+        ad_no = request.POST.get('adno_text')
+        name = request.POST.get('name_text')
+        section = request.POST.get('class_text')
+        obj.name = name
+        obj.section = section
+        obj.save()
+        return redirect('../login')
+                
+    return render(request, 'edit.html', context=data)

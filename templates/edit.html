@@ -88,66 +88,20 @@
 
   <div class="container">
     <label for="uname"><b>Admission No</b></label>
-    <input type="text" placeholder="Enter Admission No" name="adno_text">
+    <input type="text" value="{{ queryset.application_no }}" readonly placeholder="Enter Admission No" name="adno_text">
 
     <label for="psw"><b>Name</b></label>
-    <input type="text" placeholder="Enter Name" name="name_text">
+    <input type="text" value="{{ queryset.name }}" placeholder="Enter Name" name="name_text">
 
     <label for="psw"><b>Class </b></label>
-    <input type="text" placeholder="Enter Class" name="class_text">
+    <input type="text"value="{{queryset.section}}"  placeholder="Enter Class" name="class_text">
     
-    <button type="submit" name="btn">Submit</button>
+    <button type="submit" name="btn">update now</button>
     
     
   </div>
-   <div>
-    <label>
-      <br>
-      
-      <p>
-        {{result}}
-      </p>
-    </label>
-   </div>
+   
 
-  </div>
 </form>
-
-<div class="container">
-  {% if queryset %}
-  <table class="table" width="700px">
-    <tr>
-        <th>
-            Application no
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            Section
-        </th>
-    </tr>
-
-    {% for qs in queryset %}
-    <tr>
-        <td>
-            {{qs.application_no}}
-        </td>
-        <td>
-            {{qs.name}}
-        </td>
-        <td>
-            {{qs.section}}
-        </td>
-        <td>
-            <a href="../edit?id={{qs.application_no}}">Edit</a>  | <a onclick="return confirm('are you want to delete')" href="../delete?id={{qs.application_no}}">Delete</a> |  <a href="../details?id={{qs.application_no}}">View More</a>
-        </td>
-    </tr>
-
-    {% endfor %}
-</table>
-{% endif %}
-
-</div>
 
 {% endblock%}
